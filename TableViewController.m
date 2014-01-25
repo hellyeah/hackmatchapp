@@ -29,20 +29,78 @@
 {
     [super viewDidLoad];
     
-    NSURL *blogURL = [NSURL URLWithString:@"http://blog.teamtreehouse.com/api/get_recent_summary/"];
+    /*
+    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+    testObject[@"foo"] = @"bar";
+    [testObject saveInBackground];
     
-    NSData *jsonData = [NSData dataWithContentsOfURL:blogURL];
+    PFObject *gameScore = [PFObject objectWithClassName:@"posts"];
+    gameScore[@"id"] = @22901;
+    gameScore[@"title"] = @"Why You Should Use Continuous Integration and Continuous Deployment";
+    gameScore[@"author"] = @"Florian Motlik";
+    gameScore[@"thumbnail"] = @"http://blog.teamtreehouse.com/wp-content/uploads/2014/01/idea-execution-150x150.png";
+    gameScore[@"date"] = @"2014-01-24 09:00:49";
+    gameScore[@"url"] = @"http://blog.teamtreehouse.com/use-continuous-integration-continuous-deployment";
+    [gameScore saveInBackground];
+     */
     
-    NSError *error = nil;
+    PFQuery *query = [PFQuery queryWithClassName:@"posts"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            NSLog(@"Successfully retrieved %d scores.", objects.count);
+            //NSLog(@"%@", objects);
+            //NSData *data = [NSKeyedArchiver archivedDataWithRootObject:objects];
+           
+            //NSArray *keys = [NSArray arrayWithObjects:@"key",nil];
+            //NSLog(@"%@", keys);
+            //NSArray *object = [NSArray arrayWithObjects:objects,nil];
+            //NSDictionary *dataDictionary = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+            //NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:object options:0 error:&error];
+            //NSLog(@"%@", dataDictionary);
+            self.blogPosts = [NSMutableArray array];
+            
+            //NSArray *blogPostsArray = [dataDictionary objectForKey:@"posts"];
+            //NSLog(@"%@", blogPostsArray);
+            
+            for (NSDictionary *bpDictionary in objects) {
+                NSLog(@"%@", [NSURL URLWithString:[bpDictionary objectForKey:@"url"]]);
+                BlogPost *blogPost = [BlogPost blogPostWithTitle:[bpDictionary objectForKey:@"title"]];
+                blogPost.author = [bpDictionary objectForKey:@"author"];
+                blogPost.thumbnail = [bpDictionary objectForKey:@"thumbnail"];
+                blogPost.date = [bpDictionary objectForKey:@"date"];
+                blogPost.url = [NSURL URLWithString:[bpDictionary objectForKey:@"url"]];
+                [self.blogPosts addObject:blogPost];
+                [self.tableView reloadData];
+            }
+            // Do something with the found objects
+            for (PFObject *object in objects) {
+                //NSLog(@"%@", object.objectId);
+            }
+            //**refresh
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+    
+    //NSURL *blogURL = [NSURL URLWithString:@"http://blog.teamtreehouse.com/api/get_recent_summary/"];
+    
+    //NSData *jsonData = [NSData dataWithContentsOfURL:blogURL];
+    
+    //NSLog(@"json file = %@", jsonData);
+    
+    //NSError *error = nil;
     
     //NSArray *keys = [NSArray arrayWithObjects:@"key1", @"key2", nil];
     //NSArray *objects = [NSArray arrayWithObjects:@"value1", @"value2", nil];
     //NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:objects
                                                            //forKeys:keys];
     
-    NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
+    //NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
     //NSLog(@"%@",dataDictionary);
     
+    /*
     self.blogPosts = [NSMutableArray array];
     
     NSArray *blogPostsArray = [dataDictionary objectForKey:@"posts"];
@@ -55,6 +113,7 @@
         blogPost.url = [NSURL URLWithString:[bpDictionary objectForKey:@"url"]];
         [self.blogPosts addObject:blogPost];
     }
+     */
     
 }
 
@@ -85,6 +144,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     BlogPost *blogPost = [self.blogPosts objectAtIndex:indexPath.row];
+    NSLog(@"%@", blogPost);
 
     if ( [blogPost.thumbnail isKindOfClass:[NSString class]]) {
         NSData *imageData = [NSData dataWithContentsOfURL:blogPost.thumbnailURL];
