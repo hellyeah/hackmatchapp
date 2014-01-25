@@ -1,0 +1,17 @@
+{"posts":
+    [{
+     "id": "someIdentifier12345",
+     "name": "Danny",
+     "questions": [
+                   {
+                   "id": "questionId1",
+                   "name": "Creating dummy JSON data by hand."
+                   },
+                   {
+                   "id": "questionId2",
+                   "name": "Why no workie?"
+                   }
+                   ],
+     "websiteWithCoolPeople": "http://stackoverflow.com"
+     }]
+}
