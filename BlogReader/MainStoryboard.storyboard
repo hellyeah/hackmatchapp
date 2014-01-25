@@ -61,17 +61,27 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v9T-CF-4br">
+                            <webView multipleTouchEnabled="YES" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v9T-CF-4br">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Elv-R1-Na3">
+                                <rect key="frame" x="0.0" y="460" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Item" id="o9Z-cy-glx"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="v9T-CF-4br" firstAttribute="bottom" secondItem="YhL-L6-Poe" secondAttribute="bottom" type="default" id="3Ww-tS-VPD"/>
+                            <constraint firstAttribute="trailing" secondItem="Elv-R1-Na3" secondAttribute="trailing" type="default" id="3KS-YU-dpo"/>
                             <constraint firstItem="v9T-CF-4br" firstAttribute="top" secondItem="YhL-L6-Poe" secondAttribute="top" type="default" id="Hex-bA-z1L"/>
                             <constraint firstItem="v9T-CF-4br" firstAttribute="leading" secondItem="YhL-L6-Poe" secondAttribute="leading" type="default" id="OIr-gh-icc"/>
-                            <constraint firstItem="v9T-CF-4br" firstAttribute="trailing" secondItem="YhL-L6-Poe" secondAttribute="trailing" type="default" id="THN-QJ-4ur"/>
+                            <constraint firstItem="Elv-R1-Na3" firstAttribute="trailing" secondItem="v9T-CF-4br" secondAttribute="trailing" type="default" id="V2n-XL-M9I"/>
+                            <constraint firstItem="Elv-R1-Na3" firstAttribute="leading" secondItem="v9T-CF-4br" secondAttribute="leading" type="default" id="kfJ-gL-lfR"/>
+                            <constraint firstItem="Elv-R1-Na3" firstAttribute="bottom" secondItem="v9T-CF-4br" secondAttribute="bottom" type="default" id="pR3-AH-37N"/>
+                            <constraint firstAttribute="bottom" secondItem="Elv-R1-Na3" secondAttribute="bottom" type="default" id="rrR-2r-jnV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="oMj-Cf-D3b"/>
