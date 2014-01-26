@@ -69,7 +69,7 @@
                                 <rect key="frame" x="0.0" y="460" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Item" id="o9Z-cy-glx"/>
+                                    <barButtonItem title="Next" id="o9Z-cy-glx"/>
                                 </items>
                             </toolbar>
                         </subviews>
